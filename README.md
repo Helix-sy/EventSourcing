@@ -86,12 +86,6 @@ The application includes Swagger UI for testing and exploring the REST API endpo
 
 Swagger UI provides a user-friendly way to interact with the API without needing external tools like Postman.
 
-## 📚 Understanding Event Sourcing - The Book
-
-### Book
-The book is written in public and current progress can always be checked [here](https://eventmodelers.de/das-eventsourcing-buch).
-
-The GitHub Repository including all source code can be found [here](https://github.com/dilgerma/eventsourcing-book).
 
 ## 📝 License
 This project is licensed under the MIT License.
