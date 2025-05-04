@@ -20,6 +20,10 @@ import de.eventsourcingbook.cart.additem.internal.ProductEntity
 import de.eventsourcingbook.cart.additem.internal.ProductRepository
 import org.springframework.data.jpa.repository.JpaRepository
 import jakarta.persistence.*
+import mu.KotlinLogging
+import org.springframework.transaction.annotation.Transactional
+
+private val logger = KotlinLogging.logger {}
 
 @Entity
 @Table(name = "products")
@@ -37,8 +41,10 @@ interface ProductRepository : JpaRepository<ProductEntity, UUID>
 class ProductProjection(
     private val productRepository: ProductRepository
 ) {
+    @Transactional
     @EventHandler
     fun on(event: ProductAddedEvent) {
+        logger.info { "Handling ProductAddedEvent: $event" }
         val entity = ProductEntity(
             productId = event.aggregateId,
             brand = event.brand,
@@ -46,6 +52,7 @@ class ProductProjection(
             stock = event.stock
         )
         productRepository.save(entity)
+        logger.info { "Product saved to database: $entity" }
     }
     fun getAll(): List<ProductResponse> = productRepository.findAll().map {
         ProductResponse(
