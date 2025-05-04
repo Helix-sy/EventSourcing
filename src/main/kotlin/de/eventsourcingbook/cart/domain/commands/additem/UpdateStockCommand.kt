@@ -6,6 +6,6 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier
 
 data class UpdateStockCommand(
     @TargetAggregateIdentifier override var aggregateId: UUID,
-    val productId: UUID,
+    val productId: Long,
     val stockChange: Int
 ) : Command

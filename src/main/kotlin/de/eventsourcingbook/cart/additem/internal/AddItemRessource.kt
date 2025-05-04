@@ -19,8 +19,7 @@ data class AddItemPayload(
     var image: String,
     var price: Double,
     var totalPrice: Double,
-    var itemId: UUID,
-    var productId: UUID
+    var productId: Long
 )
 
 @RestController
@@ -36,11 +35,10 @@ class AddItemRessource(private var commandGateway: CommandGateway) {
       @RequestParam image: String,
       @RequestParam price: Double,
       @RequestParam totalPrice: Double,
-      @RequestParam itemId: UUID,
-      @RequestParam productId: UUID
+      @RequestParam productId: Long
   ): CompletableFuture<CommandResult> {
     return commandGateway.send(
-        AddItemCommand(aggregateId, description, image, price, totalPrice, itemId, productId))
+        AddItemCommand(aggregateId, description, image, price, totalPrice, productId))
   }
 
   @CrossOrigin
@@ -56,7 +54,6 @@ class AddItemRessource(private var commandGateway: CommandGateway) {
             image = payload.image,
             price = payload.price,
             totalPrice = payload.totalPrice,
-            itemId = payload.itemId,
             productId = payload.productId))
   }
 }

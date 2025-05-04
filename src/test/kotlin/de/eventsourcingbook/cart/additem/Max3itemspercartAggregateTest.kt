@@ -37,7 +37,6 @@ class Max3itemspercartAggregateTest {
           description = RandomData.newInstance {}
           image = RandomData.newInstance {}
           price = RandomData.newInstance {}
-          itemId = RandomData.newInstance {}
           productId = RandomData.newInstance {}
         })
     events.add(
@@ -46,7 +45,6 @@ class Max3itemspercartAggregateTest {
           description = RandomData.newInstance {}
           image = RandomData.newInstance {}
           price = RandomData.newInstance {}
-          itemId = RandomData.newInstance {}
           productId = RandomData.newInstance {}
         })
     events.add(
@@ -55,7 +53,6 @@ class Max3itemspercartAggregateTest {
           description = RandomData.newInstance {}
           image = RandomData.newInstance {}
           price = RandomData.newInstance {}
-          itemId = RandomData.newInstance {}
           productId = RandomData.newInstance {}
         })
 
@@ -67,7 +64,6 @@ class Max3itemspercartAggregateTest {
             image = RandomData.newInstance {},
             price = RandomData.newInstance {},
             totalPrice = RandomData.newInstance {},
-            itemId = RandomData.newInstance {},
             productId = RandomData.newInstance {})
 
     // THEN

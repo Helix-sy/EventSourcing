@@ -34,6 +34,32 @@ val csvDataLoader = CsvDataLoader(commandGateway)
 csvDataLoader.loadCsvData("path/to/csv/file.csv")
 ```
 
+### Importing Kaggle CSV Data
+
+The application supports importing Kaggle CSV data into the database. The CSV file should have the following structure:
+
+| Column         | Description                          |
+|----------------|--------------------------------------|
+| event_time     | Timestamp of the event              |
+| event_type     | Type of event (e.g., cart, view)    |
+| product_id     | Unique identifier for the product   |
+| category_id    | Identifier for the product category |
+| category_code  | Code for the product category       |
+| brand          | Brand of the product                |
+| price          | Price of the product                |
+| user_id        | Identifier for the user             |
+| user_session   | Identifier for the user's session   |
+
+#### Steps to Import
+1. Ensure the database is running and the schema is applied.
+2. Use the `/import-csv` endpoint to upload the CSV file.
+   - Example cURL command:
+     ```bash
+     curl -X POST http://localhost:8080/import-csv \
+     -F "file=@path/to/your/csvfile.csv"
+     ```
+3. The application will process the file and populate the `products` and `events` tables.
+
 ## 🌐 API Endpoints
 
 ### Products

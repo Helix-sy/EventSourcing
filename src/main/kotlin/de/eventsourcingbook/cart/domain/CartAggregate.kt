@@ -19,7 +19,6 @@ class CartAggregate {
   @AggregateIdentifier var aggregateId: UUID? = null
 
   @CommandHandler
-  @CreationPolicy(AggregateCreationPolicy.CREATE_IF_MISSING)
   fun handle(command: AddItemCommand) {
     if (aggregateId == null) {
       AggregateLifecycle.apply(CartCreatedEvent(aggregateId = command.aggregateId))
@@ -33,8 +32,7 @@ class CartAggregate {
             description = command.description,
             image = command.image,
             price = command.price,
-            productId = command.productId,
-            itemId = command.itemId))
+            productId = command.productId))
   }
 
   @EventSourcingHandler
@@ -42,10 +40,10 @@ class CartAggregate {
     this.aggregateId = event.aggregateId
   }
 
-  val cartItems = mutableListOf<UUID>()
+  val cartItems = mutableListOf<Long>()
 
   @EventSourcingHandler
   fun on(event: ItemAddedEvent) {
-    this.cartItems.add(event.itemId)
+    this.cartItems.add(event.productId)
   }
 }

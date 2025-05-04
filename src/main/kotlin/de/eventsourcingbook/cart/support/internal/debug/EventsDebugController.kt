@@ -15,7 +15,7 @@ class EventsDebugController(val eventStorageEngine: EventStorageEngine) {
 
   @CrossOrigin
   @GetMapping("/internal/debug/events/{aggregateId}")
-  fun resolveEvents(@PathVariable("aggregateId") aggregateId: UUID): List<DomainEventMessage<*>> {
+  fun resolveEvents(@PathVariable("aggregateId") aggregateId: Long): List<DomainEventMessage<*>> {
     return eventStorageEngine.readEvents(aggregateId.toString()).asSequence().toList()
   }
 }

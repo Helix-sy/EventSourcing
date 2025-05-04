@@ -10,6 +10,5 @@ data class AddItemCommand(
     var image: String,
     var price: Double,
     var totalPrice: Double,
-    var itemId: UUID,
-    var productId: UUID
+    var productId: Long
 ) : Command

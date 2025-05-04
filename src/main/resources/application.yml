@@ -4,7 +4,7 @@ spring:
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -12,12 +12,9 @@ spring:
     password: postgres
     driver-class-name: org.postgresql.Driver
 
-# Flyway Configuration
+# Disable Flyway
   flyway:
-    url: jdbc:postgresql://localhost:5432/postgres
-    locations: classpath:db/migration
-    user: postgres
-    password: postgres
+    enabled: false
 
 axon:
   serializer:
@@ -25,6 +22,13 @@ axon:
     general: jackson
   axonserver:
     enabled: false
+  eventhandling:
+    processors:
+      default:
+        mode: tracking
+  eventstore:
+    jdbc:
+      schema: axon
 
 application:
   debug:

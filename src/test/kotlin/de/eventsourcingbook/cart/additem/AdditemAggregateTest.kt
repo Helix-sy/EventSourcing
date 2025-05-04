@@ -34,7 +34,7 @@ class AdditemAggregateTest {
             image = RandomData.newInstance {},
             price = RandomData.newInstance {},
             totalPrice = RandomData.newInstance {},
-            itemId = RandomData.newInstance {},
+        
             productId = RandomData.newInstance {})
 
     // THEN
@@ -49,7 +49,6 @@ class AdditemAggregateTest {
           this.description = command.description
           this.image = command.image
           this.price = command.price
-          this.itemId = command.itemId
           this.productId = command.productId
         })
 
