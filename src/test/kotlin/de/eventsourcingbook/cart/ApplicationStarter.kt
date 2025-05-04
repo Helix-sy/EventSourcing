@@ -2,15 +2,14 @@ package de.eventsourcingbook.cart
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection
 import org.springframework.context.annotation.Bean
-import org.testcontainers.containers.PostgreSQLContainer
-import org.testcontainers.utility.DockerImageName
+import java.sql.Connection
+import java.sql.DriverManager
 
 object ApplicationStarter {
   @JvmStatic
   fun main(args: Array<String>) {
-    SpringApplication.from(SpringApp::main).with(ContainerConfiguration::class.java).run(*args)
+    SpringApplication.from(SpringApp::main).run(*args)
   }
 }
 
@@ -18,18 +17,10 @@ object ApplicationStarter {
 internal class ContainerConfiguration {
 
   @Bean
-  @ServiceConnection
-  fun postgresContainer(): PostgreSQLContainer<*> {
-    val postgres =
-        PostgreSQLContainer(DockerImageName.parse("postgres"))
-            .withReuse(true)
-            .withExposedPorts(POSTGRES_PORT)
-            .withPassword("postgres")
-            .withUsername("postgres")
-    return postgres
-  }
-
-  companion object {
-    val POSTGRES_PORT = 5432
+  fun databaseConnection(): Connection {
+    val url = "jdbc:postgresql://localhost:5432/test"
+    val username = "postgres"
+    val password = "postgres"
+    return DriverManager.getConnection(url, username, password)
   }
 }
